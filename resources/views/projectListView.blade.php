@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Laravel</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="content">
+                @foreach ($projectList as $project)
+                    <a href="{{ $project->name }}" class="title">{!! $project->name !!}</a><br/>
+                @endforeach
+            </div>
+
+            <form method="post" action="{{ action('ProjectListController@addProject') }}">
+                {{ csrf_field() }}
+
+                Project Name:
+                <input type="text" name="projectName"/>
+                <input type="submit"/>
+            </form>
+        </div>
+    </body>
+</html>
