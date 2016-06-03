@@ -1,25 +1,60 @@
 digraph {
     //layout = circo;
     //mindist = .5;
+    rankdir=LR;
 
-    main -> ui_implementation;
-    main -> adding;
+    disp_project_list -> ui_design;
+    disp_project_list -> disp_endpoint_list;
+    disp_project_list -> adding_project;
+    disp_project_list -> removing_project;
 
-    ui_implementation -> ui_desing;
+    disp_endpoint_list -> ui_design;
+    disp_endpoint_list -> disp_single_endpoint;
+    disp_endpoint_list -> disp_modification_list;
+    disp_endpoint_list -> adding_endpoint;
+    disp_endpoint_list -> removing_endpoint;
+    disp_endpoint_list -> modifying_project;
 
-    adding -> adding_project;
-    adding -> adding_endpoint;
-    adding_endpoint -> adding_parameters;
-    adding_endpoint -> adding_modifications;
+    disp_single_endpoint -> ui_design;
+    disp_single_endpoint -> adding_parameter;
+    disp_single_endpoint -> modifying_endpoint;
+    disp_single_endpoint -> modifying_parameter;
+    disp_single_endpoint -> removing_parameter;
 
-    main    [label="Endpoint Mock"];
+    disp_modification_list -> ui_design;
+    disp_modification_list -> disp_single_modification;
+    disp_modification_list -> adding_modification;
+    disp_modification_list -> removing_modification;
+
+    disp_single_modification -> ui_design;
+    disp_single_modification -> modifying_modification;
+
+    ui_design -> ui_implementation;
+
+
+
+
+    disp_project_list           [label="Project List", style="filled", fillcolor="yellowgreen"];
+    disp_endpoint_list          [label="Endpoint List", style="filled", fillcolor="yellowgreen"];
+    disp_modification_list      [label="Modification List"];
+    disp_single_endpoint        [label="Single Endpoint"];
+    disp_single_modification    [label="Single Modification"];
 
     ui_implementation   [label="UI Implementation"];
-    ui_desing           [label="UI Design"];
+    ui_design           [label="UI Design"];
 
-    adding                  [label="Adding Elements"];
     adding_project          [label="Adding Project", style="filled", fillcolor="yellowgreen"];
-    adding_endpoint         [label="Adding Endpoint"];
-    adding_parameters       [label="Adding Parameters"];
-    adding_modifications    [label="Adding Modifications"];
+    adding_endpoint         [label="Adding Endpoint", style="filled", fillcolor="yellowgreen"];
+    adding_parameter        [label="Adding Parameters"];
+    adding_modification     [label="Adding Modifications"];
+
+    modifying_project       [label="Modifying Project"];
+    modifying_endpoint      [label="Modifying Endpoint"];
+    modifying_parameter     [label="Modifying Parameter"];
+    modifying_modification  [label="Modifying Modification"];
+
+    removing_project        [label="Removing Project"];
+    removing_endpoint       [label="Removing Endpoint"];
+    removing_parameter      [label="Removing Parameter"];
+    removing_modification   [label="Removing Modification"];
 }
