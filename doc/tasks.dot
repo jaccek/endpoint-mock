@@ -1,0 +1,25 @@
+digraph {
+    //layout = circo;
+    //mindist = .5;
+
+    main -> ui_implementation;
+    main -> adding;
+
+    ui_implementation -> ui_desing;
+
+    adding -> adding_project;
+    adding -> adding_endpoint;
+    adding_endpoint -> adding_parameters;
+    adding_endpoint -> adding_modifications;
+
+    main    [label="Endpoint Mock"];
+
+    ui_implementation   [label="UI Implementation"];
+    ui_desing           [label="UI Design"];
+
+    adding                  [label="Adding Elements"];
+    adding_project          [label="Adding Project", style="filled", fillcolor="yellowgreen"];
+    adding_endpoint         [label="Adding Endpoint"];
+    adding_parameters       [label="Adding Parameters"];
+    adding_modifications    [label="Adding Modifications"];
+}

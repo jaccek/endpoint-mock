@@ -9,7 +9,7 @@
         <div class="container">
             <div class="content">
                 @foreach ($endpointList as $endpoint)
-                    <a href="{{$projectName.'/'.$endpoint->name}}"><h1>{{$endpoint->name}}</h1></a>
+                    <a href="{{ $projectName.'/'.$endpoint->name }}"><h1>{{ $endpoint->name }}</h1></a>
                     <h2>Original url</h2>
                     {{$endpoint->originalUrl}}
 
