@@ -42,7 +42,7 @@ class SingleEndpointController extends Controller
 
         // modify response
         $responseJson = json_decode($response, true);
-        $modificationList = $endpoint->responses()->firstOrFail()->modifications()->get();
+        $modificationList = $endpoint->modifications()->get();
         foreach ($modificationList as $mod)
         {
             $parsedValue = json_decode($mod->value, true);

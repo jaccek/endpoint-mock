@@ -28,7 +28,7 @@ class ProjectListController extends Controller
             return redirect()->back();
         }
 
-        $project = new \App\Project;
+        $project = new \App\Project();
         $project->name = $request->input('projectName');
         $project->save();
 

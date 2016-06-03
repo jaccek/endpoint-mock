@@ -14,7 +14,7 @@ class CreateEndpointsTable extends Migration
     {
         Schema::create('endpoints', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100)->unique();
+            $table->string('name', 100);
             $table->string('originalUrl', 256);
             $table->string('httpMethod');
             $table->integer('delay');
