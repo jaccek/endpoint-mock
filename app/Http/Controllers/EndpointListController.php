@@ -41,15 +41,4 @@ class EndpointListController extends Controller
 
         return redirect()->back();
     }
-
-    public function showDetails(Request $request, $projectName, $endpointName)
-    {
-        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
-        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
-
-        // show endpoints list
-        return view('endpointDetailsView', [
-            'endpoint' => $endpoint,
-        ]);
-    }
 }

@@ -8,24 +8,22 @@
     <body>
         <div class="container">
             <div class="content">
-                @foreach ($endpointList as $endpoint)
-                    <a href="{{ $projectName.'/query/'.$endpoint->name }}"><h1>{{ $endpoint->name }}</h1></a>
-                    <h2>Original url</h2>
-                    {{$endpoint->originalUrl}}
+                <h1>{{ $endpoint->name }}</h1>
+                <h2>Original url</h2>
+                {{$endpoint->originalUrl}}
 
-                    <h2>Fixed parameters</h2>
-                    @foreach ($endpoint->parameters as $param)
-                        {{ $param->name.' -> '.$param->fixedValue }}
-                    @endforeach
+                <h2>Fixed parameters</h2>
+                @foreach ($endpoint->parameters as $param)
+                    {{ $param->name.' -> '.$param->fixedValue }}
+                @endforeach
 
-                    <h2>Response changes</h2>
-                    @foreach ($endpoint->modifications as $modification)
-                        {{ $modification->path.' -> '.$modification->value }}
-                    @endforeach
+                <h2>Response changes</h2>
+                @foreach ($endpoint->modifications as $modification)
+                    {{ $modification->path.' -> '.$modification->value }}
                 @endforeach
             </div>
 
-            <form method="post" action="{{ action('EndpointListController@addEndpoint', $projectName) }}">
+            <!-- <form method="post" action="{{ action('EndpointListController@addEndpoint', $projectName) }}">
                 {{ csrf_field() }}
 
                 Endpoint Name:<br/>
@@ -36,7 +34,7 @@
                 Modifications:<br/>
                 <label><input type="checkbox" name="modificationNames[]" value="aaa"/>aaa<label><br/>
                 <input type="submit"/>
-            </form>
+            </form> -->
         </div>
 
         <script src="https://code.jquery.com/jquery-2.2.4.js"></script>

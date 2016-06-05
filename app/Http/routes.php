@@ -31,7 +31,9 @@ Route::get('{projName}', 'EndpointListController@showList');
 Route::post('{projName}', 'EndpointListController@addEndpoint');
 
 // management of single endpoint
-Route::get('{projName}/manage/{endpointName}', 'EndpointListController@showDetails');
+Route::get('{projName}/manage/{endpointName}', 'SingleEndpointController@showDetails');
+Route::get('{projName}/edit/{endpointName}', 'SingleEndpointController@showEditable');
+Route::post('{projName}/edit/{endpointName}', 'SingleEndpointController@editEndpoint');
 
 // query endpoint
 Route::any('{projName}/query/{endpointName}', 'SingleEndpointController@query');

@@ -55,4 +55,36 @@ class SingleEndpointController extends Controller
                 ->header('Content-Type', 'application/json')
                 ->header('Original-Url', $url);
     }
+
+
+    public function showDetails(Request $request, $projectName, $endpointName)
+    {
+        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
+        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
+
+        // show endpoints list
+        return view('endpointDetailsView', [
+            'endpoint' => $endpoint,
+            'projectName' => $projectName
+        ]);
+    }
+
+
+    public function showEditable(Request $request, $projectName, $endpointName)
+    {
+        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
+        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
+
+        // show endpoints list
+        return view('endpointEditableView', [
+            'endpoint' => $endpoint,
+            'projectName' => $projectName
+        ]);
+    }
+
+
+    public function editEndpoint(Request $request, $projectName, $endpointName)
+    {
+        return redirect()->back();
+    }
 }
