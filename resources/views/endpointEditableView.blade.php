@@ -1,4 +1,48 @@
-<!DOCTYPE html>
+@extends('baseView')
+
+
+@section('content')
+    <form method="post" action="{{
+        action('SingleEndpointController@editEndpoint', [
+                'projName => $projectName',
+                'endpointName => $endpoint->name'
+        ]) }}">
+
+        {{ csrf_field() }}
+
+        <h1>{{ $endpoint->name }}</h1>
+
+        Original URL:<br/>
+        <input type="text" name="params[]" value="{{ $endpoint->originalUrl }}"/><br/>
+
+        Parameters:<br/>
+        @foreach($endpoint->parameters as $param)
+            <input type="text" name="params[]" value="{{ $param->name }}"/> ->
+            <input type="text" name="fixedValues[]" value="{{ $param->fixedValue }}"/><br/>
+        @endforeach
+        <a id="add_param">Dodaj parametr</a><br/>
+
+        Modifications:<br/>
+        @foreach($modList as $mod)
+            <label><input type="checkbox" name="modificationIds[]" value="{{ $mod->id }}"/>{{ $mod->name }}<label><br/>
+        @endforeach
+        <input type="submit"/>
+    </form>
+@endsection
+
+
+@section('script')
+    function addParamInputs()
+    {
+        var inputs = '<input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>';
+        $('#add_param').before($(inputs));
+    }
+
+    $('#add_param').click(addParamInputs);
+@endsection
+
+
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Laravel</title>
@@ -23,7 +67,7 @@
                 @endforeach
             </div>
 
-            <!-- <form method="post" action="{{ action('EndpointListController@addEndpoint', $projectName) }}">
+            <form method="post" action="{{ action('EndpointListController@addEndpoint', $projectName) }}">
                 {{ csrf_field() }}
 
                 Endpoint Name:<br/>
@@ -34,18 +78,12 @@
                 Modifications:<br/>
                 <label><input type="checkbox" name="modificationNames[]" value="aaa"/>aaa<label><br/>
                 <input type="submit"/>
-            </form> -->
+            </form>
         </div>
 
         <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
         <script>
-            function addParamInputs()
-            {
-                var inputs = '<input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>';
-                $('#add_param').before($(inputs));
-            }
 
-            $('#add_param').click(addParamInputs);
         </script>
     </body>
-</html>
+</html> -->

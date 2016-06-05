@@ -74,9 +74,11 @@ class SingleEndpointController extends Controller
     {
         $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
         $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
+        $modList = \App\Modification::get();
 
         // show endpoints list
         return view('endpointEditableView', [
+            'modList' => $modList,
             'endpoint' => $endpoint,
             'projectName' => $projectName
         ]);
@@ -85,6 +87,9 @@ class SingleEndpointController extends Controller
 
     public function editEndpoint(Request $request, $projectName, $endpointName)
     {
-        return redirect()->back();
+        return redirect()->action('SingleEndpointController@showDetails', [
+            'projName' => $projectName,
+            'endpointName' => $endpointName
+        ]);
     }
 }

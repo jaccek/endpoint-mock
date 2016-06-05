@@ -9,7 +9,7 @@
         <div class="container">
             <div class="content">
                 @foreach ($projectList as $project)
-                    <a href="{{ $project->name }}" class="title">{!! $project->name !!}</a><br/>
+                    <a href="{{ action('EndpointListController@showList', [ 'projName' => $project->name ]) }}" >{!! $project->name !!}</a><br/>
                 @endforeach
             </div>
 

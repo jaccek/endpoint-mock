@@ -9,8 +9,14 @@
         <div class="container">
             <div class="content">
                 <h1>{{ $endpoint->name }}</h1>
-                <a href="{{ '../../'.$projectName.'/query/'.$endpoint->name }}">Test query</a>
-                <a href="{{ '../../'.$projectName.'/edit/'.$endpoint->name }}">Edit</a>
+                <a href="<?php echo action('SingleEndpointController@query', [
+                        'projName' => $projectName,
+                        'endpointName' => $endpoint->name]) ?>">
+                    Test query</a>
+                <a href="<?php echo action('SingleEndpointController@editEndpoint', [
+                        'projName' => $projectName,
+                        'endpointName' => $endpoint->name]) ?>">
+                    Edit</a>
                 <h2>Original url</h2>
                 {{$endpoint->originalUrl}}
 
@@ -25,16 +31,5 @@
                 @endforeach
             </div>
         </div>
-
-        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-        <script>
-            function addParamInputs()
-            {
-                var inputs = '<input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>';
-                $('#add_param').before($(inputs));
-            }
-
-            $('#add_param').click(addParamInputs);
-        </script>
     </body>
 </html>

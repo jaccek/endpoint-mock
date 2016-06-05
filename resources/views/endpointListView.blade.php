@@ -9,8 +9,8 @@
         <div class="container">
             <div class="content">
                 @foreach ($endpointList as $endpoint)
-                    <a href="{{ $projectName.'/manage/'.$endpoint->name }}"><h1>{{ $endpoint->name }}</h1></a>
-                    <a href="{{ $projectName.'/query/'.$endpoint->name }}">Test query</a>
+                    <a href="{{ action('SingleEndpointController@showDetails', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}"><h1>{{ $endpoint->name }}</h1></a>
+                    <a href="{{ action('SingleEndpointController@query', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Test query</a>
                     <h2>Original url</h2>
                     {{$endpoint->originalUrl}}
 
