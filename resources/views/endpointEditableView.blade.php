@@ -2,24 +2,26 @@
 
 
 @section('content')
-    <form method="post" action="{{
+    <form method="post" action="<?php
         action('SingleEndpointController@editEndpoint', [
                 'projName => $projectName',
                 'endpointName => $endpoint->name'
-        ]) }}">
+        ]) ?>">
 
         {{ csrf_field() }}
 
         <h1>{{ $endpoint->name }}</h1>
 
         Original URL:<br/>
-        <input type="text" name="params[]" value="{{ $endpoint->originalUrl }}"/><br/>
+        <input type="text" name="originalUrl" value="{{ $endpoint->originalUrl }}"/><br/>
 
         Parameters:<br/>
-        @foreach($endpoint->parameters as $param)
-            <input type="text" name="params[]" value="{{ $param->name }}"/> ->
-            <input type="text" name="fixedValues[]" value="{{ $param->fixedValue }}"/><br/>
-        @endforeach
+        <?php $count = count(old('params', $endpoint->parameters)); ?>
+        @for($i = 0; $i < $count; $i++)
+            <?php $param = array_get($endpoint->parameters, $i, null); ?>
+            <input type="text" name="params[{{ $i }}]" value="{{ old("params.$i", array_get($param, 'name')) }}"/> ->
+            <input type="text" name="fixedValues[{{ $i }}]" value="{{ old("fixedValues.$i", array_get($param, 'fixedValue')) }}"/><br/>
+        @endfor
         <a id="add_param">Dodaj parametr</a><br/>
 
         Modifications:<br/>

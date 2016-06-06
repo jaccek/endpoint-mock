@@ -87,6 +87,10 @@ class SingleEndpointController extends Controller
 
     public function editEndpoint(Request $request, $projectName, $endpointName)
     {
+        $this->validate($request, [
+            'dupa' => 'required'
+        ]);
+
         return redirect()->action('SingleEndpointController@showDetails', [
             'projName' => $projectName,
             'endpointName' => $endpointName

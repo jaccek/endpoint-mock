@@ -22,15 +22,13 @@ class EndpointListController extends Controller
 
     public function addEndpoint(Request $request, $projectName)
     {
-        // check if we have endpoint with given name
-        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
-        $count = $proj->endpoints()->where('name', '=', $request->input('endpointName'))->count();
-        if ($count != 0)
-        {
-            // TODO: temporary
-            return abort(500, "Endpoint with that name already added to this project");
-        }
+        // validate data
+        $this->validate($request, [
+            'endpointName' => 'required|alpha_dash|unique:endpoints,name',
+            'originalUrl' => 'required|url'
+        ]);
 
+        // create new endpoint
         $newEndpoint = new \App\Endpoint();
         $newEndpoint->name = $request->input('endpointName');
         $newEndpoint->originalUrl = $request->input('originalUrl');

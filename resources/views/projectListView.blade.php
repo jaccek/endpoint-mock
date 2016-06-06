@@ -17,7 +17,8 @@
                 {{ csrf_field() }}
 
                 Project Name:
-                <input type="text" name="projectName"/>
+                <input type="text" name="projectName" value="{{ old('projectName') }}"/>
+                {{ $errors->first('projectName') }}
                 <input type="submit"/>
             </form>
         </div>

@@ -30,9 +30,10 @@
                 {{ csrf_field() }}
 
                 Endpoint Name:<br/>
-                <input type="text" name="endpointName"/><br/>
+                <input type="text" name="endpointName" value="{{ old('endpointName') }}"/>{{ $errors->first('endpointName') }}<br/>
                 Original URL:<br/>
-                <input type="text" name="originalUrl"/><br/>
+                <input type="text" name="originalUrl" value="{{ old('originalUrl') }}"/>{{ $errors->first('originalUrl') }}<br/>
+
                 <!-- <input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>
                 <a id="add_param">Dodaj parametr</a><br/>
                 Modifications:<br/>

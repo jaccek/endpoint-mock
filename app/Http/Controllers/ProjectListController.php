@@ -22,11 +22,9 @@ class ProjectListController extends Controller
     public function addProject(Request $request)
     {
         // validate data
-        // TODO: alphanumeric check
-        if (strlen($request->input('projectName', '')) == 0)
-        {
-            return redirect()->back();
-        }
+        $this->validate($request, [
+            'projectName' => 'required|alpha_dash|unique:projects,name'
+        ]);
 
         $project = new \App\Project();
         $project->name = $request->input('projectName');
