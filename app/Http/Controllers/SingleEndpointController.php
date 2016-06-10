@@ -21,7 +21,6 @@ class SingleEndpointController extends Controller
         $url = $endpoint->originalUrl;
 
         // insert fixed params
-        //$params = \App\Parameter::where('endpointId', $endpoint->id)->get();
         $paramList = $endpoint->parameters()->get();
         if (!is_null($paramList))
         {
@@ -87,10 +86,37 @@ class SingleEndpointController extends Controller
 
     public function editEndpoint(Request $request, $projectName, $endpointName)
     {
+        // validate data
         $this->validate($request, [
-            'dupa' => 'required'
+            'originalUrl' => 'required|url',
+            'params.*' => 'alpha_dash|required_with:fixedValues',
+            'fixedValues.*' => 'alpha_dash|required_with:params'
+            //'dupa' => 'required'
         ]);
 
+        // get endpoint object
+        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
+        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
+
+        // update url
+        $endpoint->originalUrl = $request->input('originalUrl');
+
+        // update parameters
+        $endpoint->parameters()->delete();
+        $newParams = $request->input('params');
+        $newFixedValues = $request->input('fixedValues');
+        for ($i = 0; $i < count($newParams); $i++)
+        {
+            $param = new \App\Parameter();
+            $param->name = $newParams[$i];
+            $param->fixedValue = $newFixedValues[$i];
+            $param->endpointId = $endpoint->id;
+            $param->save();
+        }
+
+        // modificationIds - tablica id-ków modyfikacji (wartości 'value')
+
+        // show details of enpoint
         return redirect()->action('SingleEndpointController@showDetails', [
             'projName' => $projectName,
             'endpointName' => $endpointName

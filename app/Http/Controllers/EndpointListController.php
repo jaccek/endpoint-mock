@@ -28,6 +28,9 @@ class EndpointListController extends Controller
             'originalUrl' => 'required|url'
         ]);
 
+        // get project
+        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
+
         // create new endpoint
         $newEndpoint = new \App\Endpoint();
         $newEndpoint->name = $request->input('endpointName');

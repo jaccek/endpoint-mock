@@ -13,14 +13,15 @@
         <h1>{{ $endpoint->name }}</h1>
 
         Original URL:<br/>
-        <input type="text" name="originalUrl" value="{{ $endpoint->originalUrl }}"/><br/>
+        <input type="text" name="originalUrl" value="{{ $endpoint->originalUrl }}"/>{{ $errors->first('originalUrl') }}<br/>
 
         Parameters:<br/>
         <?php $count = count(old('params', $endpoint->parameters)); ?>
         @for($i = 0; $i < $count; $i++)
             <?php $param = array_get($endpoint->parameters, $i, null); ?>
             <input type="text" name="params[{{ $i }}]" value="{{ old("params.$i", array_get($param, 'name')) }}"/> ->
-            <input type="text" name="fixedValues[{{ $i }}]" value="{{ old("fixedValues.$i", array_get($param, 'fixedValue')) }}"/><br/>
+            <input type="text" name="fixedValues[{{ $i }}]" value="{{ old("fixedValues.$i", array_get($param, 'fixedValue')) }}"/>
+            {{ $errors->first('params.'.$i).' '.$errors->first('fixedValues.'.$i) }}<br/>
         @endfor
         <a id="add_param">Dodaj parametr</a><br/>
 

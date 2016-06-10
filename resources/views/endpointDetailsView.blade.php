@@ -22,12 +22,12 @@
 
                 <h2>Fixed parameters</h2>
                 @foreach ($endpoint->parameters as $param)
-                    {{ $param->name.' -> '.$param->fixedValue }}
+                    {{ $param->name.' -> '.$param->fixedValue }}<br/>
                 @endforeach
 
                 <h2>Response changes</h2>
                 @foreach ($endpoint->modifications as $modification)
-                    {{ $modification->path.' -> '.$modification->value }}
+                    {{ $modification->path.' -> '.$modification->value }}<br/>
                 @endforeach
             </div>
         </div>
