@@ -75,9 +75,18 @@ class SingleEndpointController extends Controller
         $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
         $modList = \App\Modification::get();
 
+        $endpointMods = $endpoint->modifications();
+        $modSelectionList = [];
+        foreach($modList as $key => $singleMod)
+        {
+            $selected = !is_null($endpointMods->where('modifications.id', '=', $singleMod->id)->first());
+            $modSelectionList[$key] = $selected;
+        }
+
         // show endpoints list
         return view('endpointEditableView', [
             'modList' => $modList,
+            'modSelectionList' => $modSelectionList,
             'endpoint' => $endpoint,
             'projectName' => $projectName
         ]);
@@ -114,7 +123,7 @@ class SingleEndpointController extends Controller
             $param->save();
         }
 
-        // modificationIds - tablica id-ków modyfikacji (wartości 'value')
+        // TODO: modificationIds - tablica id-ków modyfikacji (wartości 'value')
 
         // show details of enpoint
         return redirect()->action('SingleEndpointController@showDetails', [

@@ -18,6 +18,12 @@ class ModificationsTableSeeder extends Seeder
                 'path' => 'info.liveId',
                 'value' => '{"data":"test"}'
             ],
+            [
+                'name' => 'test_02',
+                'type' => 1,
+                'path' => 'info.liveId',
+                'value' => '{"data":"test"}'
+            ],
         ]);
     }
 }

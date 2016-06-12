@@ -13,7 +13,7 @@
         <h1>{{ $endpoint->name }}</h1>
 
         Original URL:<br/>
-        <input type="text" name="originalUrl" value="{{ $endpoint->originalUrl }}"/>{{ $errors->first('originalUrl') }}<br/>
+        <input type="text" name="originalUrl" value="{{ old('originalUrl', $endpoint->originalUrl) }}"/>{{ $errors->first('originalUrl') }}<br/>
 
         Parameters:<br/>
         <?php $count = count(old('params', $endpoint->parameters)); ?>
@@ -26,9 +26,12 @@
         <a id="add_param">Dodaj parametr</a><br/>
 
         Modifications:<br/>
-        @foreach($modList as $mod)
-            <label><input type="checkbox" name="modificationIds[]" value="{{ $mod->id }}"/>{{ $mod->name }}<label><br/>
-        @endforeach
+        <?php $hasOld = !is_null(old('originalUrl')); ?>
+        <?php $count = count($modList); ?>
+        @for($i = 0; $i < $count; $i++)
+            <?php $isChecked = in_array($modList[$i]->id, old("modificationIds", [])) || (!$hasOld && $modSelectionList[$i]); ?>
+            <label><input type="checkbox" name="modificationIds[]" value="{{ $modList[$i]->id }}" {{ $isChecked ? 'checked="checked"' : '' }}/>{{ $modList[$i]->name }}<label><br/>
+        @endfor
         <input type="submit"/>
     </form>
 @endsection
@@ -43,50 +46,3 @@
 
     $('#add_param').click(addParamInputs);
 @endsection
-
-
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-    </head>
-
-    <body>
-        <div class="container">
-            <div class="content">
-                <h1>{{ $endpoint->name }}</h1>
-                <h2>Original url</h2>
-                {{$endpoint->originalUrl}}
-
-                <h2>Fixed parameters</h2>
-                @foreach ($endpoint->parameters as $param)
-                    {{ $param->name.' -> '.$param->fixedValue }}
-                @endforeach
-
-                <h2>Response changes</h2>
-                @foreach ($endpoint->modifications as $modification)
-                    {{ $modification->path.' -> '.$modification->value }}
-                @endforeach
-            </div>
-
-            <form method="post" action="{{ action('EndpointListController@addEndpoint', $projectName) }}">
-                {{ csrf_field() }}
-
-                Endpoint Name:<br/>
-                <input type="text" name="endpointName"/><br/>
-                Parameters:<br/>
-                <input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>
-                <a id="add_param">Dodaj parametr</a><br/>
-                Modifications:<br/>
-                <label><input type="checkbox" name="modificationNames[]" value="aaa"/>aaa<label><br/>
-                <input type="submit"/>
-            </form>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-        <script>
-
-        </script>
-    </body>
-</html> -->
