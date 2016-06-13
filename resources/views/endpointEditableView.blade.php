@@ -16,6 +16,7 @@
         <input type="text" name="originalUrl" value="{{ old('originalUrl', $endpoint->originalUrl) }}"/>{{ $errors->first('originalUrl') }}<br/>
 
         Parameters:<br/>
+        <!-- TODO: possibility to delete params -->
         <?php $count = count(old('params', $endpoint->parameters)); ?>
         @for($i = 0; $i < $count; $i++)
             <?php $param = array_get($endpoint->parameters, $i, null); ?>
@@ -29,7 +30,7 @@
         <?php $hasOld = !is_null(old('originalUrl')); ?>
         <?php $count = count($modList); ?>
         @for($i = 0; $i < $count; $i++)
-            <?php $isChecked = in_array($modList[$i]->id, old("modificationIds", [])) || (!$hasOld && $modSelectionList[$i]); ?>
+            <?php $isChecked = in_array($modList[$i]->id, old("modificationIds", [])) || (!$hasOld && in_array($modList[$i]->id, $modSelectionList)); ?>
             <label><input type="checkbox" name="modificationIds[]" value="{{ $modList[$i]->id }}" {{ $isChecked ? 'checked="checked"' : '' }}/>{{ $modList[$i]->name }}<label><br/>
         @endfor
         <input type="submit"/>

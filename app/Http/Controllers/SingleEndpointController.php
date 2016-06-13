@@ -75,12 +75,11 @@ class SingleEndpointController extends Controller
         $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
         $modList = \App\Modification::get();
 
-        $endpointMods = $endpoint->modifications();
+        $endpointMods = $endpoint->modifications;
         $modSelectionList = [];
-        foreach($modList as $key => $singleMod)
+        foreach($endpointMods as $singleMod)
         {
-            $selected = !is_null($endpointMods->where('modifications.id', '=', $singleMod->id)->first());
-            $modSelectionList[$key] = $selected;
+            array_push($modSelectionList, $singleMod->id);
         }
 
         // show endpoints list
@@ -99,8 +98,8 @@ class SingleEndpointController extends Controller
         $this->validate($request, [
             'originalUrl' => 'required|url',
             'params.*' => 'alpha_dash|required_with:fixedValues',
-            'fixedValues.*' => 'alpha_dash|required_with:params'
-            //'dupa' => 'required'
+            'fixedValues.*' => 'alpha_dash|required_with:params',
+            'modificationIds.*' => 'numeric'    // TODO: validate if modifications exists
         ]);
 
         // get endpoint object
@@ -123,7 +122,13 @@ class SingleEndpointController extends Controller
             $param->save();
         }
 
-        // TODO: modificationIds - tablica id-ków modyfikacji (wartości 'value')
+        // update modifications
+        $modificationIds = $request->input('modificationIds');
+        if (is_null($modificationIds))
+        {
+            $modificationIds = [];
+        }
+        $endpoint->modifications()->sync($modificationIds);
 
         // show details of enpoint
         return redirect()->action('SingleEndpointController@showDetails', [

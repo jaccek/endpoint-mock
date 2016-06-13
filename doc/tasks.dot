@@ -37,7 +37,7 @@ digraph {
     disp_project_list           [label="Project List", style="filled", fillcolor="yellowgreen"];
     disp_endpoint_list          [label="Endpoint List", style="filled", fillcolor="yellowgreen"];
     disp_modification_list      [label="Modification List"];
-    
+
     disp_single_endpoint        [label="Single Endpoint", style="filled", fillcolor="yellowgreen"];
     disp_single_modification    [label="Single Modification"];
 
@@ -46,12 +46,12 @@ digraph {
 
     adding_project          [label="Adding Project", style="filled", fillcolor="yellowgreen"];
     adding_endpoint         [label="Adding Endpoint", style="filled", fillcolor="yellowgreen"];
-    adding_parameter        [label="Adding Parameters"];
+    adding_parameter        [label="Adding Parameters", style="filled", fillcolor="yellowgreen"];
     adding_modification     [label="Adding Modifications"];
 
-    modifying_project       [label="Modifying Project"];
-    modifying_endpoint      [label="Modifying Endpoint"];
-    modifying_parameter     [label="Modifying Parameter"];
+    modifying_project       [label="Modifying Project", style="filled", fillcolor="red"];
+    modifying_endpoint      [label="Modifying Endpoint", style="filled", fillcolor="yellowgreen"];
+    modifying_parameter     [label="Modifying Parameter", style="filled", fillcolor="yellowgreen"];
     modifying_modification  [label="Modifying Modification"];
 
     removing_project        [label="Removing Project"];

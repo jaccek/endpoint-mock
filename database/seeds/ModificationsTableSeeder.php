@@ -21,7 +21,7 @@ class ModificationsTableSeeder extends Seeder
             [
                 'name' => 'test_02',
                 'type' => 1,
-                'path' => 'info.liveId',
+                'path' => 'info.discipline',
                 'value' => '{"data":"test"}'
             ],
         ]);
