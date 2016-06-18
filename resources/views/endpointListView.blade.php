@@ -9,8 +9,9 @@
         <div class="container">
             <div class="content">
                 @foreach ($endpointList as $endpoint)
-                    <a href="{{ action('SingleEndpointController@showDetails', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}"><h1>{{ $endpoint->name }}</h1></a>
+                    <h1>{{ $endpoint->name }}</h1>
                     <a href="{{ action('SingleEndpointController@query', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Test query</a>
+                    <a href="{{ action('SingleEndpointController@showEditable', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Edit</a>
                     <h2>Original url</h2>
                     {{$endpoint->originalUrl}}
 
@@ -33,11 +34,6 @@
                 <input type="text" name="endpointName" value="{{ old('endpointName') }}"/>{{ $errors->first('endpointName') }}<br/>
                 Original URL:<br/>
                 <input type="text" name="originalUrl" value="{{ old('originalUrl') }}"/>{{ $errors->first('originalUrl') }}<br/>
-
-                <!-- <input type="text" name="params[]"/> -> <input type="text" name="fixedValues[]"/><br/>
-                <a id="add_param">Dodaj parametr</a><br/>
-                Modifications:<br/>
-                <label><input type="checkbox" name="modificationNames[]" value="aaa"/>aaa<label><br/> -->
                 <input type="submit"/>
             </form>
         </div>

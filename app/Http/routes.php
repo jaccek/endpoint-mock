@@ -27,13 +27,19 @@ Route::get('/', 'ProjectListController@showList');
 Route::post('/', 'ProjectListController@addProject');
 
 // list of endpoints
-Route::get('{projName}', 'EndpointListController@showList');
-Route::post('{projName}', 'EndpointListController@addEndpoint');
+Route::get('proj/{projName}', 'EndpointListController@showList');
+Route::post('proj/{projName}', 'EndpointListController@addEndpoint');
 
 // management of single endpoint
-Route::get('{projName}/manage/{endpointName}', 'SingleEndpointController@showDetails');
-Route::get('{projName}/edit/{endpointName}', 'SingleEndpointController@showEditable');
-Route::post('{projName}/edit/{endpointName}', 'SingleEndpointController@editEndpoint');
+Route::get('proj/{projName}/edit/{endpointName}', 'SingleEndpointController@showEditable');
+Route::post('proj/{projName}/edit/{endpointName}', 'SingleEndpointController@editEndpoint');
 
 // query endpoint
-Route::any('{projName}/query/{endpointName}', 'SingleEndpointController@query');
+Route::any('proj/{projName}/query/{endpointName}', 'SingleEndpointController@query');
+
+// list of modifications
+Route::get('mod', 'ModificationController@showList');
+
+// edit modification
+Route::get('mod/{modId}', 'ModificationController@showEditable');
+Route::post('mod/{modId}', 'ModificationController@editModification');

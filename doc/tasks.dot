@@ -36,7 +36,7 @@ digraph {
 
     disp_project_list           [label="Project List", style="filled", fillcolor="yellowgreen"];
     disp_endpoint_list          [label="Endpoint List", style="filled", fillcolor="yellowgreen"];
-    disp_modification_list      [label="Modification List"];
+    disp_modification_list      [label="Modification List", style="filled", fillcolor="yellowgreen"];
 
     disp_single_endpoint        [label="Single Endpoint", style="filled", fillcolor="yellowgreen"];
     disp_single_modification    [label="Single Modification"];

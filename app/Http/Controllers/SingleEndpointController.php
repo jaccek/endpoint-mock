@@ -36,6 +36,9 @@ class SingleEndpointController extends Controller
             $url = str_replace('{'.$name.'}', $value, $url);
         }
 
+        // TODO: check if some parameters are not added!
+        // TODO: optional params!
+
         // query original url
         $response = file_get_contents($url);
 
@@ -53,19 +56,6 @@ class SingleEndpointController extends Controller
         return (new Response($modifiedResponse, 200))
                 ->header('Content-Type', 'application/json')
                 ->header('Original-Url', $url);
-    }
-
-
-    public function showDetails(Request $request, $projectName, $endpointName)
-    {
-        $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
-        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
-
-        // show endpoints list
-        return view('endpointDetailsView', [
-            'endpoint' => $endpoint,
-            'projectName' => $projectName
-        ]);
     }
 
 
@@ -131,9 +121,8 @@ class SingleEndpointController extends Controller
         $endpoint->modifications()->sync($modificationIds);
 
         // show details of enpoint
-        return redirect()->action('SingleEndpointController@showDetails', [
-            'projName' => $projectName,
-            'endpointName' => $endpointName
+        return redirect()->action('EndpointListController@showList', [
+            'projName' => $projectName
         ]);
     }
 }
