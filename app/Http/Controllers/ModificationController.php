@@ -20,7 +20,11 @@ class ModificationController extends Controller
 
     public function showEditable(Request $request, $modId)
     {
-        // TODO: implement
+        $modification = \App\Modification::where('id', '=', $modId)->firstOrFail();
+
+        return view('modificationEditableView', [
+            'modification' => $modification
+        ]);
     }
 
 
