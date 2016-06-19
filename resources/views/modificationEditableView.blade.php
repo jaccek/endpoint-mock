@@ -7,12 +7,14 @@
                 'modId' => $modification->id
         ]) ?>">
 
-        Name:<br/>
-        <input type="text" name="name" value="{{ old('name', $modification->name) }}"/><br/>
+        {{ csrf_field() }}
+
+        <h1>{{ $modification->name }}</h1>
         Path:<br/>
-        <input type="text" name="path" value="{{ old('path', $modification->path) }}"/><br/>
+        <input type="text" name="path" value="{{ old('path', $modification->path) }}"/>
+        {{ $errors->first('path') }}<br/>
         Value:<br/>
-        <textarea name="value">{{ old('value', $modification->value) }}</textarea>
+        <textarea name="value">{{ old('value', $modification->value) }}</textarea><br/>
         <input type="submit"/>
     </form>
 @endsection
