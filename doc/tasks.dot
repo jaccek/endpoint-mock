@@ -10,10 +10,10 @@ digraph {
 
     disp_endpoint_list -> ui_design;
     disp_endpoint_list -> disp_single_endpoint;
-    disp_endpoint_list -> disp_modification_list;
     disp_endpoint_list -> adding_endpoint;
     disp_endpoint_list -> removing_endpoint;
     disp_endpoint_list -> modifying_project;
+    disp_endpoint_list -> disp_modification_list;
 
     disp_single_endpoint -> ui_design;
     disp_single_endpoint -> adding_parameter;

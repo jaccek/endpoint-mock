@@ -8,8 +8,6 @@
     <body>
         <div class="container">
             <div class="content">
-                <a href="{{ action('ModificationController@showList') }}">Modification List</a><br/><br/>
-
                 @foreach ($projectList as $project)
                     <a href="{{ action('EndpointListController@showList', [ 'projName' => $project->name ]) }}" >{!! $project->name !!}</a><br/>
                 @endforeach

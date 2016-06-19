@@ -12,4 +12,9 @@ class Project extends Model
     {
         return $this->hasMany('App\Endpoint', 'projectId');
     }
+
+    public function modifications()
+    {
+        return $this->hasMany('App\Modification', 'projectId');
+    }
 }

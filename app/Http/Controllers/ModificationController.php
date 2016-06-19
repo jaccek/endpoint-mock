@@ -8,31 +8,34 @@ use App\Http\Requests;
 
 class ModificationController extends Controller
 {
-    public function showList(Request $request)
+    public function showList(Request $request, $projName)
     {
         // get modifications list
-        $modificationList = \App\Modification::get();
+        $proj = \App\Project::where('name', '=', $projName)->firstOrFail();
+        $modificationList = $proj->modifications;
 
         // show view
         return view('modificationListView', [
+            'projName' => $projName,
             'modList' => $modificationList
         ]);
     }
 
 
-    public function showEditable(Request $request, $modId)
+    public function showEditable(Request $request, $projName, $modId)
     {
         // get modification
         $modification = \App\Modification::where('id', '=', $modId)->firstOrFail();
 
         // show view
         return view('modificationEditableView', [
+            'projName' => $projName,
             'modification' => $modification
         ]);
     }
 
 
-    public function editModification(Request $request, $modId)
+    public function editModification(Request $request, $projName, $modId)
     {
         // validate data
         $this->validate($request, [
@@ -49,6 +52,8 @@ class ModificationController extends Controller
         $modification->save();
 
         // show modifications list
-        return redirect()->action('ModificationController@showList');
+        return redirect()->action('ModificationController@showList', [
+            'projName' => $projName
+        ]);
     }
 }

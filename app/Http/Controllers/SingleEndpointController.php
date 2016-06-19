@@ -63,7 +63,7 @@ class SingleEndpointController extends Controller
     {
         $proj = \App\Project::where('name', '=', $projectName)->firstOrFail();
         $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
-        $modList = \App\Modification::get();
+        $modList = $proj->modifications;
 
         $endpointMods = $endpoint->modifications;
         $modSelectionList = [];

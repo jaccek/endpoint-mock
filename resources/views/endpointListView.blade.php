@@ -8,6 +8,8 @@
     <body>
         <div class="container">
             <div class="content">
+                <a href="{{ action('ModificationController@showList', ['projName' => $projectName]) }}">Modification List</a><br/><br/>
+
                 @foreach ($endpointList as $endpoint)
                     <h1>{{ $endpoint->name }}</h1>
                     <a href="{{ action('SingleEndpointController@query', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Test query</a>

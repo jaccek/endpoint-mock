@@ -38,8 +38,8 @@ Route::post('proj/{projName}/edit/{endpointName}', 'SingleEndpointController@edi
 Route::any('proj/{projName}/query/{endpointName}', 'SingleEndpointController@query');
 
 // list of modifications
-Route::get('mod', 'ModificationController@showList');
+Route::get('proj/{projName}/mod', 'ModificationController@showList');
 
 // edit modification
-Route::get('mod/{modId}', 'ModificationController@showEditable');
-Route::post('mod/{modId}', 'ModificationController@editModification');
+Route::get('proj/{projName}/mod/{modId}', 'ModificationController@showEditable');
+Route::post('proj/{projName}/mod/{modId}', 'ModificationController@editModification');

@@ -15,9 +15,10 @@ class CreateModificationsTable extends Migration
         Schema::create('modifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->integer('type');    // TODO: create table to prevent not specified values
             $table->string('path', 512);
             $table->text('value');
+            $table->integer('projectId')->unsigned();
+            $table->foreign('projectId')->references('id')->on('projects');
         });
     }
 

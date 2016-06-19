@@ -4,6 +4,7 @@
 @section('content')
     <form method="post" action="<?php
         action('ModificationController@editModification', [
+                'projName' => $projName,
                 'modId' => $modification->id
         ]) ?>">
 

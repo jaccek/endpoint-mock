@@ -11,18 +11,21 @@ class ModificationsTableSeeder extends Seeder
      */
     public function run()
     {
+        $sfProj = \App\Project::where('name', 'SportoweFakty')->firstOrFail();
+        $sfId = $sfProj->id;
+
         DB::table('modifications')->insert([
             [
                 'name' => 'test_01',
-                'type' => 1,
                 'path' => 'info.liveId',
-                'value' => '{"data":"test"}'
+                'value' => '{"data":"test"}',
+                'projectId' => $sfId
             ],
             [
                 'name' => 'test_02',
-                'type' => 1,
                 'path' => 'info.discipline',
-                'value' => '{"data":"test"}'
+                'value' => '{"data":"test"}',
+                'projectId' => $sfId
             ],
         ]);
     }
