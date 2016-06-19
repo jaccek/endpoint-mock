@@ -47,7 +47,7 @@ digraph {
     adding_project          [label="Adding Project", style="filled", fillcolor="yellowgreen"];
     adding_endpoint         [label="Adding Endpoint", style="filled", fillcolor="yellowgreen"];
     adding_parameter        [label="Adding Parameters", style="filled", fillcolor="yellowgreen"];
-    adding_modification     [label="Adding Modifications"];
+    adding_modification     [label="Adding Modifications", style="filled", fillcolor="yellowgreen"];
 
     modifying_project       [label="Modifying Project", style="filled", fillcolor="red"];
     modifying_endpoint      [label="Modifying Endpoint", style="filled", fillcolor="yellowgreen"];

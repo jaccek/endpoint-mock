@@ -10,4 +10,16 @@
         Value:<br/>
         {{ $mod->value }}<br/>
     @endforeach
+
+    <br/><br/>
+    <form method="post" action="<?php action('ModificationController@addModification', [
+            'projName' => $projName
+        ])?>">
+        {{ csrf_field() }}
+
+        Name:<br/>
+        <input type="text", name="name", value="{{ old('name') }}"/>
+        {{ $errors->first('name') }}<br/>
+        <input type="submit"/>
+    </form>
 @endsection

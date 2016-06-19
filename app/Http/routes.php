@@ -39,6 +39,7 @@ Route::any('proj/{projName}/query/{endpointName}', 'SingleEndpointController@que
 
 // list of modifications
 Route::get('proj/{projName}/mod', 'ModificationController@showList');
+Route::post('proj/{projName}/mod', 'ModificationController@addModification');
 
 // edit modification
 Route::get('proj/{projName}/mod/{modId}', 'ModificationController@showEditable');
