@@ -54,8 +54,8 @@ digraph {
     modifying_parameter     [label="Modifying Parameter", style="filled", fillcolor="yellowgreen"];
     modifying_modification  [label="Modifying Modification", style="filled", fillcolor="yellowgreen"];
 
-    removing_project        [label="Removing Project"];
-    removing_endpoint       [label="Removing Endpoint"];
-    removing_parameter      [label="Removing Parameter"];
-    removing_modification   [label="Removing Modification"];
+    removing_project        [label="Removing Project", style="filled", fillcolor="yellowgreen"];
+    removing_endpoint       [label="Removing Endpoint", style="filled", fillcolor="yellowgreen"];
+    removing_parameter      [label="Removing Parameter", style="filled", fillcolor="yellowgreen"];
+    removing_modification   [label="Removing Modification", style="filled", fillcolor="yellowgreen"];
 }

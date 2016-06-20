@@ -46,6 +46,19 @@ class ModificationController extends Controller
     }
 
 
+    public function removeModification(Request $request, $projName, $modId)
+    {
+        // get modification
+        $modification = \App\Modification::where('id', '=', $modId)->firstOrFail();
+
+        // delete modification
+        $modification->delete();
+
+        // show list of modifications
+        return redirect()->back();
+    }
+
+
     public function showEditable(Request $request, $projName, $modId)
     {
         // get modification

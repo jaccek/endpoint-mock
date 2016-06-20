@@ -4,7 +4,14 @@
 @section('content')
     @foreach($modList as $mod)
         <h1>{{ $mod->name }}</h1>
-        <a href="{{ action('ModificationController@showEditable', ['projName' => $projName, 'modId' => $mod->id]) }}">Edit</a><br/>
+        <a href="<?php echo action('ModificationController@showEditable', [
+                'projName' => $projName,
+                'modId' => $mod->id
+            ]) ?>">Edit</a>
+        <a href="<?php echo action('ModificationController@removeModification', [
+                'projName' => $projName,
+                'modId' => $mod->id
+            ]) ?>">Remove</a><br/>
         Path:<br/>
         {{ $mod->path }}<br/>
         Value:<br/>
@@ -15,6 +22,7 @@
     <form method="post" action="<?php action('ModificationController@addModification', [
             'projName' => $projName
         ])?>">
+
         {{ csrf_field() }}
 
         Name:<br/>

@@ -26,6 +26,9 @@ Route::get('/test', function() {
 Route::get('/', 'ProjectListController@showList');
 Route::post('/', 'ProjectListController@addProject');
 
+// remove project
+Route::get('proj/{projName}/del', 'ProjectListController@removeProject');
+
 // list of endpoints
 Route::get('proj/{projName}', 'EndpointListController@showList');
 Route::post('proj/{projName}', 'EndpointListController@addEndpoint');
@@ -34,12 +37,21 @@ Route::post('proj/{projName}', 'EndpointListController@addEndpoint');
 Route::get('proj/{projName}/edit/{endpointName}', 'SingleEndpointController@showEditable');
 Route::post('proj/{projName}/edit/{endpointName}', 'SingleEndpointController@editEndpoint');
 
+// remove endpoint
+Route::get('proj/{projName}/edit/{endpointName}/del', 'SingleEndpointController@removeEndpoint');
+
+// remove endpoint parameter
+Route::get('proj/{projName}/edit/{endpointName}/param/del/{parameterId}', 'SingleEndpointController@removeParameter');
+
 // query endpoint
 Route::any('proj/{projName}/query/{endpointName}', 'SingleEndpointController@query');
 
 // list of modifications
 Route::get('proj/{projName}/mod', 'ModificationController@showList');
 Route::post('proj/{projName}/mod', 'ModificationController@addModification');
+
+// remove modification
+Route::get('proj/{projName}/mod/del/{modId}', 'ModificationController@removeModification');
 
 // edit modification
 Route::get('proj/{projName}/mod/{modId}', 'ModificationController@showEditable');

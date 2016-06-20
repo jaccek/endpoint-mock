@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Project;
+use App\Endpoint;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // removing project
+        Project::deleting(function ($project)
+        {
+            $project->endpoints()->delete();
+        });
+
+        // removing endpoint
+        Endpoint::deleting(function ($endpoint)
+        {
+            $endpoint->parameters()->delete();
+        });
     }
 
     /**

@@ -20,6 +20,7 @@ class EndpointListController extends Controller
         ]);
     }
 
+
     public function addEndpoint(Request $request, $projectName)
     {
         // validate data

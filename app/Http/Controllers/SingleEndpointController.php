@@ -82,6 +82,19 @@ class SingleEndpointController extends Controller
     }
 
 
+    public function removeParameter(Request $request, $projectName, $endpointName, $parameterId)
+    {
+        // get parameter
+        $parameter = \App\Parameter::where('id', '=', $parameterId)->firstOrFail();
+
+        // remove parameter
+        $parameter->delete();
+
+        // back to previous page
+        return redirect()->back();
+    }
+
+
     public function editEndpoint(Request $request, $projectName, $endpointName)
     {
         // validate data
@@ -124,5 +137,19 @@ class SingleEndpointController extends Controller
         return redirect()->action('EndpointListController@showList', [
             'projName' => $projectName
         ]);
+    }
+
+
+    public function removeEndpoint(Request $request, $projName, $endpointName)
+    {
+        // get endpoint object
+        $proj = \App\Project::where('name', '=', $projName)->firstOrFail();
+        $endpoint = $proj->endpoints()->where('name', '=', $endpointName)->firstOrFail();
+
+        // remove endpoint
+        $endpoint->delete();
+
+        // back to previous page
+        return redirect()->back();
     }
 }

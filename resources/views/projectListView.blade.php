@@ -9,7 +9,12 @@
         <div class="container">
             <div class="content">
                 @foreach ($projectList as $project)
-                    <a href="{{ action('EndpointListController@showList', [ 'projName' => $project->name ]) }}" >{!! $project->name !!}</a><br/>
+                    <a href="<?php echo action('EndpointListController@showList', [
+                            'projName' => $project->name
+                        ]) ?>" >{!! $project->name !!}</a>
+                    <a href="<?php echo action('ProjectListController@removeProject', [
+                            'projName' => $project->name
+                        ]) ?>" >Remove</a><br/>
                 @endforeach
             </div>
 

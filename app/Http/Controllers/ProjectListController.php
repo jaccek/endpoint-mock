@@ -19,6 +19,7 @@ class ProjectListController extends Controller
         ]);
     }
 
+
     public function addProject(Request $request)
     {
         // validate data
@@ -30,6 +31,19 @@ class ProjectListController extends Controller
         $project->name = $request->input('projectName');
         $project->save();
 
+        return redirect()->back();
+    }
+
+
+    public function removeProject(Request $request, $projName)
+    {
+        // get project object
+        $project = \App\Project::where('name', '=', $projName)->firstOrFail();
+
+        // remove project
+        $project->delete();
+
+        // back to previous view
         return redirect()->back();
     }
 }

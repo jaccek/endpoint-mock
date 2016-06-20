@@ -12,14 +12,33 @@
 
                 @foreach ($endpointList as $endpoint)
                     <h1>{{ $endpoint->name }}</h1>
-                    <a href="{{ action('SingleEndpointController@query', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Test query</a>
-                    <a href="{{ action('SingleEndpointController@showEditable', [ 'projName' => $projectName, 'endpointName' => $endpoint->name ]) }}">Edit</a>
+
+                    <a href="<?php echo action('SingleEndpointController@query', [
+                            'projName' => $projectName,
+                            'endpointName' => $endpoint->name
+                        ]) ?>">Test query</a>
+
+                    <a href="<?php echo action('SingleEndpointController@showEditable', [
+                            'projName' => $projectName,
+                            'endpointName' => $endpoint->name
+                        ]) ?>">Edit</a>
+
+                    <a href="<?php echo action('SingleEndpointController@removeEndpoint', [
+                            'projName' => $projectName,
+                            'endpointName' => $endpoint->name
+                        ]) ?>">Remove</a>
+
                     <h2>Original url</h2>
                     {{$endpoint->originalUrl}}
 
                     <h2>Fixed parameters</h2>
                     @foreach ($endpoint->parameters as $param)
                         {{ $param->name.' -> '.$param->fixedValue }}
+                        <a href="<?php echo action('SingleEndpointController@removeParameter', [
+                                'projName' => $projectName,
+                                'endpointName' => $endpoint->name,
+                                'parameterId' => $param->id
+                            ]) ?>">Remove</a><br/>
                     @endforeach
 
                     <h2>Response changes</h2>
